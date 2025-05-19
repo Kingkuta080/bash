@@ -1,57 +1,73 @@
+"use client"
 import React from 'react';
 import { FaDownload, FaGithub, FaLinkedin, FaYoutube, FaXTwitter } from 'react-icons/fa6';
 import { ArrowRight } from 'lucide-react';
 import Image from 'next/image';
-import { bashHero, HeroVector } from '@/assets';
+import { bashHero, HeroVector, WorkFrame } from '@/assets';
+import { motion } from 'framer-motion';
 
 export default function Hero() {
   return (
-    <section className="relative flex flex-col items-center justify-center min-h-screen bg-black pt-[10rem] pb-[10rem]">
-      {/* Background doodles (optional, can be added as SVG or background image) */}
+    <motion.section
+      id="home"
+      className="relative flex flex-col items-center justify-center min-h-screen bg-black px-4 sm:px-8 pt-24 pb-16"
+      initial={{ opacity: 0, y: 40 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, amount: 0.3 }}
+      transition={{ duration: 0.7, ease: 'easeOut' }}
+    >
       {/* Greeting */}
-      <div className="text-cyan-400 text-lg mb-2 flex items-center gap-2">
-        <span >—</span> <span className='text-white'>Hello</span> <span>—</span> 
+      <div className="text-cyan-400 text-base sm:text-lg mb-2 flex items-center gap-2">
+        <span>—</span> <span className="text-white">Hello</span> <span>—</span>
       </div>
       {/* Main Heading */}
-      <h1 className="text-5xl md:text-7xl font-extrabold text-white text-center leading-tight">
-        I&apos;m <span className="text-cyan-400">Bash,</span><br />UI/UX Designer
+      <h1 className="text-3xl sm:text-5xl md:text-7xl font-extrabold text-white text-center leading-tight tracking-tight mb-4">
+        I&apos;m <span className="text-cyan-400">Bash,</span><br className="hidden sm:block" />UI/UX Designer
       </h1>
       {/* Image, Vector, and Buttons Overlap */}
-      <div className="relative flex items-center justify-center w-[55.5%] h-[55.5%] mt-20">
+      <div className="relative flex items-center justify-center w-full max-w-lg aspect-square mt-4 sm:mt-8">
         {/* Vector behind the image */}
         <Image
           src={HeroVector}
           alt="Vector"
-          className="absolute inset-0 w-[35rem] ml-24 object-cover z-0"
+          fill
+          className="object-contain z-0 rounded-2xl opacity-70"
         />
         {/* Main hero image */}
         <Image
           src={bashHero}
           alt="Bash UI/UX Designer"
-          className="relative w-[60.5%] h-[60.5%] object-cover rounded-2xl mr-20 -mt-[8rem] z-10"
+          fill
+          className="object-cover rounded-2xl shadow-2xl border-4 border-black z-10"
         />
         {/* Buttons on top of the image */}
-        <div className="absolute inset-0 flex items-end justify-center pb-12 z-20">
-          <div className="bg-white border-2 p-1 border-cyan-400 rounded-full flex gap-0">
-            <button className="flex items-center gap-2 bg-cyan-400 text-white px-6 py-2 rounded-full font-semibold hover:bg-cyan-500 transition">
-              Contact Me  
-              <ArrowRight className="w-5 h-5" /> 
-            </button>
-            <button className="flex items-center gap-2 border border-cyan-400 text-cyan-400 px-6 py-2 rounded-full font-semibold hover:bg-cyan-400 hover:text-white transition">
-              My Cv <FaDownload className="w-5 h-5" />
-            </button>
-          </div>
+        <div className="absolute bottom-4 left-1/2 -translate-x-1/2 z-20 w-full flex flex-col sm:flex-row items-center justify-center gap-2 sm:gap-4">
+          <button className="flex items-center gap-2 bg-cyan-400 text-white px-5 py-2 rounded-full font-semibold shadow-md hover:bg-cyan-500 transition text-sm sm:text-base focus:outline-none focus:ring-2 focus:ring-cyan-400">
+            Contact Me
+            <ArrowRight className="w-5 h-5" />
+          </button>
+          <button className="flex items-center gap-2 border border-cyan-400 text-cyan-400 px-5 py-2 rounded-full font-semibold shadow-md hover:bg-cyan-400 hover:text-white transition text-sm sm:text-base focus:outline-none focus:ring-2 focus:ring-cyan-400">
+            My Cv <FaDownload className="w-5 h-5" />
+          </button>
         </div>
       </div>
-      {/* Social Sidebar */}
-      <div className="fixed right-6 top-1/2 -translate-y-1/2 flex flex-col items-center gap-4 z-40">
-        <span className="text-white text-xs rotate-90 mb-2">Follow Me</span>
-        <a href="#" className="bg-neutral-800 p-3 rounded-full hover:bg-cyan-400 transition"><FaGithub className="text-xl text-white" /></a>
-        <a href="#" className="bg-neutral-800 p-3 rounded-full hover:bg-cyan-400 transition"><FaYoutube className="text-xl text-white" /></a>
-        <a href="#" className="bg-neutral-800 p-3 rounded-full hover:bg-cyan-400 transition"><FaXTwitter className="text-xl text-white" /></a>
-        <a href="#" className="bg-neutral-800 p-3 rounded-full hover:bg-cyan-400 transition"><FaLinkedin className="text-xl text-white" /></a>
+      {/* New image below all hero content */}
+      <div className="w-full max-w-4xl mx-auto mt-8">
+        <Image
+          src={WorkFrame}
+          alt="WorkFrame"
+          className="w-full h-auto object-contain rounded-xl shadow-lg"
+        />
       </div>
-    </section>
+      {/* Social Sidebar */}
+      <div className="fixed right-2 md:right-6 top-1/2 -translate-y-1/2 flex flex-col items-center gap-3 z-40">
+        <span className="text-white text-xs rotate-90 mb-2 hidden md:block">Follow Me</span>
+        <a href="#" className="bg-neutral-800 p-2 md:p-3 rounded-full hover:bg-cyan-400 transition focus:outline-none focus:ring-2 focus:ring-cyan-400" aria-label="Github"><FaGithub className="text-lg md:text-xl text-white" /></a>
+        <a href="#" className="bg-neutral-800 p-2 md:p-3 rounded-full hover:bg-cyan-400 transition focus:outline-none focus:ring-2 focus:ring-cyan-400" aria-label="YouTube"><FaYoutube className="text-lg md:text-xl text-white" /></a>
+        <a href="#" className="bg-neutral-800 p-2 md:p-3 rounded-full hover:bg-cyan-400 transition focus:outline-none focus:ring-2 focus:ring-cyan-400" aria-label="X"><FaXTwitter className="text-lg md:text-xl text-white" /></a>
+        <a href="#" className="bg-neutral-800 p-2 md:p-3 rounded-full hover:bg-cyan-400 transition focus:outline-none focus:ring-2 focus:ring-cyan-400" aria-label="LinkedIn"><FaLinkedin className="text-lg md:text-xl text-white" /></a>
+      </div>
+    </motion.section>
   );
 }
 
