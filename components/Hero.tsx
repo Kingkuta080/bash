@@ -82,7 +82,7 @@ export default function Hero() {
         />
       </div>
       {/* Social Sidebar */}
-      <div className="fixed right-2 md:right-6 py-18 -translate-y-2/4 flex flex-col items-center gap-3 z-40">
+      <div className="fixed right-8 md:right-6 py-18 -translate-y-2/4 flex flex-col items-center gap-3 z-40">
         <span className="text-white text-md font-bold rotate-90 mb-9 hidden md:block">Follow Me</span>
         <a href="https://www.instagram.com/bash_uiux/" target="_blank" rel="noopener noreferrer" className="bg-neutral-800 p-2 md:p-3 rounded-full hover:bg-cyan-400 transition focus:outline-none focus:ring-2 focus:ring-cyan-400" aria-label="Instagram"><FaInstagram className="text-lg md:text-xl text-white" /></a>
         <a href="https://x.com/BashirI74692251" target="_blank" rel="noopener noreferrer" className="bg-neutral-800 p-2 md:p-3 rounded-full hover:bg-cyan-400 transition focus:outline-none focus:ring-2 focus:ring-cyan-400" aria-label="X"><FaXTwitter className="text-lg md:text-xl text-white" /></a>
