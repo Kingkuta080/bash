@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import { FaBoxOpen } from 'react-icons/fa';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
 import Image from 'next/image';
-import { motion } from 'framer-motion';
+import { motion, AnimatePresence } from 'framer-motion';
 
 const works = [
   [
@@ -52,73 +52,108 @@ const works = [
   ],
 ];
 
-const cardVariants = {
-  hidden: { opacity: 0, y: 40 },
-  visible: (i: number) => ({ opacity: 1, y: 0, transition: { delay: i * 0.15, duration: 0.6, ease: 'easeOut' } })
-};
-
 export default function RecentWork() {
   const [page, setPage] = useState(0);
+  const [direction, setDirection] = useState(0);
+
+  const handleNavigation = (navDirection: 'next' | 'prev') => {
+    setDirection(navDirection === 'next' ? 1 : -1);
+    setPage((prev) => {
+      if (navDirection === 'next') {
+        return prev === works.length - 1 ? 0 : prev + 1;
+      }
+      return prev === 0 ? works.length - 1 : prev - 1;
+    });
+  };
+
+  const variants = {
+    enter: (direction: number) => ({
+      x: direction > 0 ? 1000 : -1000,
+      opacity: 0
+    }),
+    center: {
+      zIndex: 1,
+      x: 0,
+      opacity: 1
+    },
+    exit: (direction: number) => ({
+      zIndex: 0,
+      x: direction < 0 ? 1000 : -1000,
+      opacity: 0
+    })
+  };
 
   return (
-    <motion.section
+    <section
       id="recentwork"
       className="w-full min-h-screen bg-black flex flex-col items-center py-16 px-4"
-      initial={{ opacity: 0, y: 40 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, amount: 0.3 }}
-      transition={{ duration: 0.7, ease: 'easeOut' }}
     >
       <div className="w-full max-w-5xl mx-auto">
         <h2 className="flex items-center gap-2 text-2xl md:text-3xl font-bold text-white mb-8">
           <FaBoxOpen className="text-cyan-400 text-2xl" />
           Recent Works
         </h2>
+        
         <div className="relative">
           {/* Navigation Buttons */}
           <button
             className="absolute left-[-2.5rem] top-1/2 -translate-y-1/2 bg-cyan-400 text-black rounded-full w-10 h-10 flex items-center justify-center shadow-lg z-10 focus:outline-none focus:ring-2 focus:ring-cyan-400"
-            onClick={() => setPage((p) => (p === 0 ? works.length - 1 : p - 1))}
+            onClick={() => handleNavigation('prev')}
             aria-label="Previous"
           >
             <ChevronLeft size={24} />
           </button>
+          
           <button
             className="absolute right-[-2.5rem] top-1/2 -translate-y-1/2 bg-cyan-400 text-black rounded-full w-10 h-10 flex items-center justify-center shadow-lg z-10 focus:outline-none focus:ring-2 focus:ring-cyan-400"
-            onClick={() => setPage((p) => (p === works.length - 1 ? 0 : p + 1))}
+            onClick={() => handleNavigation('next')}
             aria-label="Next"
           >
             <ChevronRight size={24} />
           </button>
-          {/* Works Grid */}
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-            {works[page].map((work, idx) => (
+
+          {/* Works Grid with Animation */}
+          <div className="relative overflow-hidden">
+            <AnimatePresence initial={false} custom={direction} mode="wait">
               <motion.div
-                key={idx}
-                className="bg-[#353B41] rounded-xl p-6 flex flex-col shadow-md focus:outline-none focus:ring-2 focus:ring-cyan-400 transition-all"
-                tabIndex={0}
-                variants={cardVariants}
-                initial="hidden"
-                whileInView="visible"
-                viewport={{ once: true, amount: 0.2 }}
-                custom={idx}
+                key={page}
+                custom={direction}
+                variants={variants}
+                initial="enter"
+                animate="center"
+                exit="exit"
+                transition={{
+                  x: { type: "spring", stiffness: 300, damping: 30 },
+                  opacity: { duration: 0.2 }
+                }}
+                className="grid grid-cols-1 md:grid-cols-2 gap-8"
               >
-                <div className="w-full h-48 md:h-56 rounded-lg mb-4 overflow-hidden flex items-center justify-center">
-                  <Image
-                    src={work.img}
-                    alt={work.title}
-                    width={400}
-                    height={220}
-                    className="object-contain w-full h-full"
-                  />
-                </div>
-                <h3 className="text-white text-lg font-bold mb-2">{work.title}</h3>
-                <p className="text-gray-300 text-sm">{work.desc}</p>
+                {works[page].map((work, idx) => (
+                  <motion.div
+                    key={`${page}-${idx}`}
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ delay: idx * 0.1 }}
+                    className="bg-[#353B41] rounded-xl p-6 flex flex-col shadow-md focus:outline-none focus:ring-2 focus:ring-cyan-400"
+                  >
+                    <div className="w-full h-48 md:h-56 rounded-lg mb-4 overflow-hidden flex items-center justify-center">
+                      <Image
+                        src={work.img}
+                        alt={work.title}
+                        width={400}
+                        height={220}
+                        className="object-contain w-full h-full"
+                      />
+                    </div>
+                    <h3 className="text-white text-lg font-bold mb-2">{work.title}</h3>
+                    <p className="text-gray-300 text-sm">{work.desc}</p>
+                  </motion.div>
+                ))}
               </motion.div>
-            ))}
+            </AnimatePresence>
           </div>
         </div>
       </div>
-    </motion.section>
+    </section>
   );
 }
