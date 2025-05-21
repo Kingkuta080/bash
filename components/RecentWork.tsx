@@ -59,10 +59,11 @@ export default function RecentWork() {
   const handleNavigation = (navDirection: 'next' | 'prev') => {
     setDirection(navDirection === 'next' ? 1 : -1);
     setPage((prev) => {
+      const totalPages = works.length;
       if (navDirection === 'next') {
-        return prev === works.length - 1 ? 0 : prev + 1;
+        return (prev + 1) % totalPages;
       }
-      return prev === 0 ? works.length - 1 : prev - 1;
+      return (prev - 1 + totalPages) % totalPages;
     });
   };
 
