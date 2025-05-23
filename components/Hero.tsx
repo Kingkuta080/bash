@@ -6,6 +6,17 @@ import Image from 'next/image';
 import { bashHero, HeroVector, WorkFrame } from '@/assets';
 
 export default function Hero() {
+  const handleDownloadCV = () => {
+    // Replace '/path-to-your-cv.pdf' with the actual path to your CV file
+    const cvUrl = '/bash-cv.pdf';
+    const link = document.createElement('a');
+    link.href = cvUrl;
+    link.download = 'Bash-CV.pdf'; // The name that will be used when downloading
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+  };
+
   return (
     <section
       id="home"
@@ -68,7 +79,10 @@ export default function Hero() {
             Contact Me
             <ArrowRight className="w-5 h-5" />
           </button>
-          <button className="flex items-center gap-2 border border-cyan-400 text-cyan-400 px-5 py-2 rounded-full font-semibold shadow-md hover:bg-cyan-400 hover:text-white transition text-sm sm:text-base focus:outline-none focus:ring-2 focus:ring-cyan-400">
+          <button 
+            onClick={handleDownloadCV}
+            className="flex items-center gap-2 border border-cyan-400 text-cyan-400 px-5 py-2 rounded-full font-semibold shadow-md hover:bg-cyan-400 hover:text-white transition text-sm sm:text-base focus:outline-none focus:ring-2 focus:ring-cyan-400"
+          >
             My Cv <FaDownload className="w-5 h-5" />
           </button>
         </div>
@@ -82,7 +96,7 @@ export default function Hero() {
         />
       </div>
       {/* Social Sidebar */}
-      <div className="fixed right-8 md:right-6 py-18 -translate-y-2/4 flex flex-col items-center gap-3 z-40">
+      <div className="fixed right-1 md:right-6 py-18 -translate-y-2/4 flex flex-col items-center gap-3 z-40">
         <span className="text-white text-md font-bold rotate-90 mb-9 hidden md:block">Follow Me</span>
         <a href="https://www.instagram.com/bash_uiux/" target="_blank" rel="noopener noreferrer" className="bg-neutral-800 p-2 md:p-3 rounded-full hover:bg-cyan-400 transition focus:outline-none focus:ring-2 focus:ring-cyan-400" aria-label="Instagram"><FaInstagram className="text-lg md:text-xl text-white" /></a>
         <a href="https://x.com/BashirI74692251" target="_blank" rel="noopener noreferrer" className="bg-neutral-800 p-2 md:p-3 rounded-full hover:bg-cyan-400 transition focus:outline-none focus:ring-2 focus:ring-cyan-400" aria-label="X"><FaXTwitter className="text-lg md:text-xl text-white" /></a>
