@@ -17,6 +17,13 @@ export default function Hero() {
     document.body.removeChild(link);
   };
 
+  const scrollToContact = () => {
+    const contactSection = document.getElementById('contact');
+    if (contactSection) {
+      contactSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+  };
+
   return (
     <section
       id="home"
@@ -68,14 +75,17 @@ export default function Hero() {
         />
         {/* Main hero image */}
         <Image
-          src={bashHero}
+          src={"/bashhero.png"}
           alt="Bash UI/UX Designer"
           fill
           className="object-cover rounded-2xl shadow-2xl z-10"
         />
         {/* Buttons on top of the image */}
         <div className="absolute bottom-4 left-1/2 -translate-x-1/2 z-20 w-2/3 flex flex-col mb-12 bg-white border border-cyan-400 rounded-full p-1 sm:flex-row items-center justify-center gap-2 sm:gap-4">
-          <button className="flex items-center gap-2 bg-cyan-400 text-white px-5 py-2 rounded-full font-semibold shadow-md hover:bg-cyan-500 transition text-sm sm:text-base focus:outline-none focus:ring-2 focus:ring-cyan-400">
+          <button 
+            onClick={scrollToContact}
+            className="flex items-center gap-2 bg-cyan-400 text-white px-5 py-2 rounded-full font-semibold shadow-md hover:bg-cyan-500 transition text-sm sm:text-base focus:outline-none focus:ring-2 focus:ring-cyan-400"
+          >
             Contact Me
             <ArrowRight className="w-5 h-5" />
           </button>
