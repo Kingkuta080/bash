@@ -3,7 +3,7 @@ import React from 'react';
 import { FaDownload, FaLinkedin, FaXTwitter, FaFigma, FaDiscord, FaInstagram } from 'react-icons/fa6';
 import { ArrowRight } from 'lucide-react';
 import Image from 'next/image';
-import { bashHero, HeroVector, WorkFrame } from '@/assets';
+import { HeroVector, WorkFrame } from '@/assets';
 
 export default function Hero() {
   const handleDownloadCV = () => {
