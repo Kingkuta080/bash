@@ -27,7 +27,7 @@
     };
 
     return (
-      <nav className="fixed top-0 left-0 w-[90%] z-50 bg-black/90 backdrop-blur shadow-md">
+      <nav className="fixed top-0 left-0 w-full z-50 bg-black/90 backdrop-blur shadow-md">
         <div className="max-w-7xl mx-auto flex justify-between items-center px-4 sm:px-8 py-4 h-[72px]">
           {/* Logo */}
           <div
