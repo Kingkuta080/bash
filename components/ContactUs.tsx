@@ -1,8 +1,9 @@
 "use client"
 
-import React from 'react';
+import React, { useState, useRef } from 'react';
 import { FaXTwitter, FaFigma, FaDiscord, FaInstagram, FaLinkedin, FaEnvelope } from 'react-icons/fa6';
 import { MdOutlineMail } from 'react-icons/md';
+import emailjs from '@emailjs/browser';
 
 const socials = [
   { icon: <FaXTwitter className="text-xl" />, label: 'X.com', url: 'https://x.com/BashirI74692251' },
@@ -13,6 +14,45 @@ const socials = [
 ];
 
 export default function ContactUs() {
+  const formRef = useRef<HTMLFormElement>(null);
+  const [form, setForm] = useState({
+    name: '',
+    email: '',
+    message: '',
+  });
+  const [loading, setLoading] = useState(false);
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    const { name, value } = e.target;
+    setForm(prev => ({ ...prev, [name]: value }));
+  };
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setLoading(true);
+
+    try {
+      await emailjs.sendForm(
+        'service_plijf2y',
+        'template_lc5ismv',
+        formRef.current!,
+        'pnriUgarsENG1pehg'
+      );
+
+      setForm({
+        name: '',
+        email: '',
+        message: '',
+      });
+      alert('Message sent successfully!');
+    } catch (error) {
+      console.error('Error sending message:', error);
+      alert('Failed to send message. Please try again.');
+    } finally {
+      setLoading(false);
+    }
+  };
+
   return (
     <section
       id="contact"
@@ -26,35 +66,48 @@ export default function ContactUs() {
         </div>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
           {/* Contact Form */}
-          <form className="flex flex-col gap-4">
+          <form ref={formRef} onSubmit={handleSubmit} className="flex flex-col gap-4">
             <div>
               <label className="text-white text-sm mb-1 block">Name</label>
               <input
                 type="text"
+                name="name"
+                value={form.name}
+                onChange={handleChange}
                 className="w-full rounded-md bg-black/80 text-white px-4 py-2 outline-none focus:ring-2 focus:ring-cyan-400"
                 placeholder="Your Name"
+                required
               />
             </div>
             <div>
               <label className="text-white text-sm mb-1 block">Email</label>
               <input
                 type="email"
+                name="email"
+                value={form.email}
+                onChange={handleChange}
                 className="w-full rounded-md bg-black/80 text-white px-4 py-2 outline-none focus:ring-2 focus:ring-cyan-400"
                 placeholder="Your Email"
+                required
               />
             </div>
             <div>
               <label className="text-white text-sm mb-1 block">Message</label>
               <textarea
+                name="message"
+                value={form.message}
+                onChange={handleChange}
                 className="w-full rounded-md bg-black/80 text-white px-4 py-2 h-32 outline-none focus:ring-2 focus:ring-cyan-400 resize-none"
                 placeholder="Your Message"
+                required
               />
             </div>
             <button
               type="submit"
-              className="w-full bg-cyan-400 text-white py-3 rounded-full font-semibold flex items-center justify-center gap-2 text-base hover:bg-cyan-500 transition focus:outline-none focus:ring-2 focus:ring-cyan-400"
+              disabled={loading}
+              className="w-full bg-cyan-400 text-white py-3 rounded-full font-semibold flex items-center justify-center gap-2 text-base hover:bg-cyan-500 transition focus:outline-none focus:ring-2 focus:ring-cyan-400 disabled:opacity-50 disabled:cursor-not-allowed"
             >
-              Send Message <MdOutlineMail className="text-lg" />
+              {loading ? 'Sending...' : 'Send Message'} <MdOutlineMail className="text-lg" />
             </button>
           </form>
           {/* Social/Contact Links */}
