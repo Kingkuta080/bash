@@ -1,7 +1,7 @@
 "use client"
 
 import React, { useState, useRef } from 'react';
-import { FaXTwitter, FaFigma, FaDiscord, FaInstagram, FaLinkedin, FaEnvelope } from 'react-icons/fa6';
+import { FaXTwitter, FaFigma, FaDiscord, FaInstagram, FaLinkedin } from 'react-icons/fa6';
 import { MdOutlineMail } from 'react-icons/md';
 import emailjs from '@emailjs/browser';
 
@@ -122,11 +122,6 @@ export default function ContactUs() {
               ))}
             </ul>
           </div>
-        </div>
-        {/* Email at the bottom */}
-        <div className="flex items-center justify-center gap-2 mt-10">
-          <FaEnvelope className="text-gray-400" />
-          <a href="mailto:bashondesign7@gmail.com" className="text-gray-300 underline hover:text-cyan-400 transition">bashondesign7@gmail.com</a>
         </div>
       </div>
     </section>
