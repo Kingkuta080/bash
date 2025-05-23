@@ -1,7 +1,7 @@
 "use client"
 import React, { useState } from 'react';
 import { FaBoxOpen } from 'react-icons/fa';
-import { ChevronLeft, ChevronRight } from 'lucide-react';
+import { ChevronLeft, ChevronRight, ArrowRight } from 'lucide-react';
 import Image from 'next/image';
 import { motion, AnimatePresence } from 'framer-motion';
 
@@ -11,21 +11,25 @@ const works = [
       img: '/kadsubeb.svg',
       title: 'Kad-SUBEB-Plus — Education Management System for Kaduna State',
       desc: 'Designed a digital system for Kaduna State to streamline teacher HR, attendance, infrastructure, and performance tracking—improving transparency, data-driven decisions, and service delivery in basic education.',
+      link: 'https://www.figma.com/design/lNQHBGOKpMaNvMAmvFk8NU/KAD-SUBEB-PLUS?node-id=0-1&t=COTrbs3R2vX6yTGM-1'
     },
     {
       img: '/power.svg',
       title: 'Powermate – Social Media Time Management App',
       desc: 'Powermate is a gamified screen time manager that helps you beat phone addiction with the support of friends. Block distracting apps, set custom limits, and stay accountable through group challenges and time requests. Build better habits, together.',
+      link: 'https://www.figma.com/design/83CO9839O9EfElMYXcu40C/Powermate-App-Design?m=auto&t=mtlfE2nkWqK5i8xa-6'
     },
     {
       img: '/safe.svg',
       title: 'Safe Heaven Exchanger – Crypto Exchange Platform UI',
       desc: 'Designed a secure, modern interface for a crypto exchange platform. Focused on clarity, trust, and ease of use—featuring real-time rates, transaction flows, and intuitive onboarding.',
+      link: 'https://www.figma.com/design/IHhIgsKCsoM7OV2svgoYsb/Safe-Heaven-Exchanger?m=auto&t=mtlfE2nkWqK5i8xa-6'
     },
     {
       img: '/game.svg',
       title: 'MyGamer Heaven – Game Review Website',
       desc: 'MyGamer Heaven – Game Review Website. Designed a clean, engaging platform for gamers to explore reviews, ratings, and featured titles—focused on readability, bold visuals, and smooth navigation.',
+      link: 'https://www.figma.com/design/zhofrYbXnTS5tekg8qQNIW/MyGamer-Heaven-website?m=auto&t=mtlfE2nkWqK5i8xa-6'
     },
   ],
   [
@@ -33,21 +37,25 @@ const works = [
       img: '/asmo.svg',
       title: 'Asmo Bank – Digital Banking App UI',
       desc: 'Designed a sleek, user-focused banking app with intuitive navigation, clean dashboards, and smart money management features for a seamless digital finance experience.',
+      link: 'https://www.figma.com/design/W33X0jHMZjY9yVNG7bADJI/Asmo-Bank?m=auto&t=mtlfE2nkWqK5i8xa-6'
     },
     {
       img: '/unvibe.svg',
       title: 'Unvibe – Landing Page Design',
       desc: 'Designed a bold, expressive landing page for Unvibe—a dev-focused platform with personality. The design captures the brand\'s energy while clearly showcasing features and driving sign-ups.',
+      link: 'https://www.figma.com/design/fcgtAmLrWiq9JtiSrL4WQV/Unvibe-landing-page-Design?m=auto&t=mtlfE2nkWqK5i8xa-6'
     },
     {
       img: '/intel.svg',
       title: 'IntelliSales – E-commerce App for Selling Projects',
       desc: 'Designed a streamlined app for buying and selling projects, featuring easy browsing, secure transactions, and clear product details.',
+      link: 'https://www.figma.com/design/7xL5KJeHBmtVF2UyaSEiKN/IntelliSales-App?m=auto&t=mtlfE2nkWqK5i8xa-6'
     },
     {
       img: '/scale.svg',
       title: 'Evaramedia – Snapchat Media Agency Website',
       desc: 'Designed a sleek, dynamic website for a Snapchat-focused media agency, showcasing their expertise, campaigns, and client success with a vibrant, engaging layout.',
+      link: 'https://www.figma.com/design/JZYP56KW5TlD0yfKF2N4yz/Evaramedia-website?m=auto&t=mtlfE2nkWqK5i8xa-6'
     },
   ],
 ];
@@ -147,7 +155,15 @@ export default function RecentWork() {
                       />
                     </div>
                     <h3 className="text-white text-lg font-bold mb-2">{work.title}</h3>
-                    <p className="text-gray-300 text-sm">{work.desc}</p>
+                    <p className="text-gray-300 text-sm mb-4">{work.desc}</p>
+                    <a 
+                      href={work.link}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="mt-auto inline-flex items-center gap-2 text-cyan-400 hover:text-cyan-300 transition-colors"
+                    >
+                      View Design <ArrowRight className="w-4 h-4" />
+                    </a>
                   </motion.div>
                 ))}
               </motion.div>
