@@ -98,7 +98,7 @@ export default function RecentWork() {
         <div className="relative">
           {/* Navigation Buttons */}
           <button
-            className="absolute left-[-2.5rem] top-1/2 -translate-y-1/2 bg-cyan-400 text-black rounded-full w-10 h-10 flex items-center justify-center shadow-lg z-10 focus:outline-none focus:ring-2 focus:ring-cyan-400"
+            className="absolute left-[-8rem] text-white top-1/2 -translate-y-1/2 bg-cyan-400 text-black rounded-full w-10 h-10 flex items-center justify-center shadow-lg z-10 focus:outline-none focus:ring-2 focus:ring-cyan-400"
             onClick={() => handleNavigation('prev')}
             aria-label="Previous"
           >
@@ -106,7 +106,7 @@ export default function RecentWork() {
           </button>
           
           <button
-            className="absolute right-[-2.5rem] top-1/2 -translate-y-1/2 bg-cyan-400 text-black rounded-full w-10 h-10 flex items-center justify-center shadow-lg z-10 focus:outline-none focus:ring-2 focus:ring-cyan-400"
+            className="absolute right-[-8rem] text-white top-1/2 -translate-y-1/2 bg-cyan-400 text-black rounded-full w-10 h-10 flex items-center justify-center shadow-lg z-10 focus:outline-none focus:ring-2 focus:ring-cyan-400"
             onClick={() => handleNavigation('next')}
             aria-label="Next"
           >
